@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+
+    =========================================
+    Design and Development of Secure Software
+    ============= MSI 2019/2020 =============
+    ======== Practical Assignment #2 ========
+    ================ Part #1 ================
+    =========================================
+
+      Department of Informatics Engineering
+              University of Coimbra          
+   
+    Prof. Marco Vieira <mvieira@dei.uc.pt>
+    Prof. Nuno Antunes <nmsa@dei.uc.pt>
+   
+-->
+<html>
+    <head>
+        <title>DDSS PA2 - Part 1.2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--
+            V2 info:
+            - corrected a few naming bugs in the inputs
+            - fixed a few syntax issues in the HTML
+            - added some explanations
+        -->
+    </head>
+    <body>
+        <div align="center">
+
+            <h1>Design and Development of Secure Software</h1>
+            <h2>Practical Assignment #2 - Part 1.2 </h2>
+            <div align="center">
+                DISCLAIMER: This code is to be used in the scope of the <em>DDSS</em> course.
+                <b>Important:</b> these sources are merely suggestions of implementations. 
+                You should modify everything you deem as necessary and be responsible for all the content that is delivered.
+                <em>The contents of this repository do not replace the proper reading of the assignment description.</em>
+            </div>
+            <br>
+            <br>
+            <h1>LIST OF BOOKS</h1>
+            <button id="ComeBackButton">Retroceder</button>
+            <br>
+            <br>
+
+            {% if results %}
+            <!--Verify if there is any book in the list-->
+            {% for book in results %}
+            <!--Cicle to get each book-->
+            <table  style="width: 500px" border="1" cellpadding="1" >
+                <thead>
+                    <tr>
+                        <th colspan="2"><b>Book Nrº: {{book.book_id}}</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label>Title</label></td>
+                        <td><em>{{book.title}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><label>Author/s</label></td>
+                        <td><em>{{book.authors}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><label>Category</label></td>
+                        <td><em>{{book.category}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><label>Price</label></td>
+                        <td><em>{{book.price}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><label>Book Date</label></td>
+                        <td><em>{{book.book_date}}</em></td>
+                    </tr>
+                    {% if book.description %}
+                    <!--Verify if the user selected with or without summary-->
+                    <tr>
+                        <td><label>Description</label></td>
+                        <td><em>{{book.description}}</em></td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td><label>Keywords</label></td>
+                        <td><em>{{book.keywords}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><label>Notes</label></td>
+                        <td><em>{{book.notes}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><label>Recommendation</label></td>
+                        <td><em>{{book.recomendation}}</em></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            {% endfor %} 
+            {% else %}
+            <!--Warn the user that the list is empty-->
+            <div style="text-align: center; color: red;">
+                <p>No books found. Please try again or check back later.</p>
+                <span style="font-size: 24px;">&#9888;</span>
+            </div>
+            {% endif %}
+            <br>
+            <br>
+
+        </div>
+        <script>
+            // Add a click event listener to the "ComeBack" button
+            document.getElementById('ComeBackButton').addEventListener('click', function() {
+                // Perform any actions you want when the "Register" button is clicked
+                // You can use window.location.href to redirect to a new page or update the current page
+                window.location.href = "{{ url_for('part3') }}";
+            });
+        </script>
+    </body>
+</html>

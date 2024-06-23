@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+
+    =========================================
+    Design and Development of Secure Software
+    ============= MSI 2019/2020 =============
+    ======== Practical Assignment #2 ========
+    ================ Part #1 ================
+    =========================================
+
+      Department of Informatics Engineering
+              University of Coimbra          
+   
+    Prof. Marco Vieira <mvieira@dei.uc.pt>
+    Prof. Nuno Antunes <nmsa@dei.uc.pt>
+   
+-->
+<html>
+    <head>
+        <title>DDSS PA2 - Part 1.1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--
+            V2 info:
+            - corrected a few naming bugs in the inputs
+            - fixed a few syntax issues in the HTML
+            - added some explanations
+        -->
+    </head>
+    <body>
+        <div align="center">
+
+            <h1>Design and Development of Secure Software</h1>
+            <h2>Practical Assignment #2 - Part 1.1</h2>
+            <div align="center">
+                DISCLAIMER: This code is to be used in the scope of the <em>DDSS</em> course.
+                <b>Important:</b> these sources are merely suggestions of implementations. 
+                You should modify everything you deem as necessary and be responsible for all the content that is delivered.
+                <em>The contents of this repository do not replace the proper reading of the assignment description.</em>
+            </div>
+            <br>
+            <br>
+            <!-- Display flash messages for the vulnerable registration form -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == "register2_error" %}
+                            <table  border="1" cellpadding="1" style="width: 350px; background-color:#f19191">
+                                <thread>
+                                    <tr>
+                                        <th colspan="2" class="alert alert-{{ category }}" role="alert"><b>{{ message }}</b></th>
+                                    </tr>
+                                </thread>
+                            </table>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="/handle_register2">
+                <table  border="1" cellpadding="1" style="width: 350px; background-color:#f19191">
+                    <thead>
+                        <tr>
+                            <th colspan="2"><b>Part 1.0 - Register Vulnerable Form</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label>Username</label></td>
+                            <td><input type="text" placeholder="Enter Username" name="new_v_username" required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Password</label> </td>
+                            <td><input type="password" placeholder="Enter Password" name="new_v_password" required> </td>
+                        </tr>
+                        <tr>
+                            <td><label>Confirm Password</label> </td>
+                            <td><input type="password" placeholder="Confirm Password" name="confirm_new_v_password" required> </td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="2">
+                                <button type="submit">Create</button>
+                                <button id="CancelButton2">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form> 
+
+            <br>
+            <br>
+
+
+            <!-- Display flash messages for the correct registration form -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == "register_error" %}
+                            <table  border="1" cellpadding="1" style="width: 350px; background-color:#f1f1f1">
+                                <thread>
+                                    <tr>
+                                        <th colspan="2" class="alert alert-{{ category }}" role="alert"><b>{{ message }}</b></th>
+                                    </tr>
+                                </thread>
+                            </table>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="/handle_register">
+                <table  border="1" cellpadding="1" style="width: 350px; background-color:#f1f1f1">
+                    <thead>
+                        <tr>
+                            <th colspan="2"><b>Part 1.0 - Register Correct Form</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label>Username</label></td>
+                            <td><input type="text" placeholder="Enter Username" name="new_username" required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Password</label> </td>
+                            <td><input type="password" placeholder="Enter Password" name="new_password" required> </td>
+                        </tr>
+                        <tr>
+                            <td><label>Confirm Password</label> </td>
+                            <td><input type="password" placeholder="Confirm Password" name="confirm_new_password" required> </td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="2">
+                                <button type="submit">Create</button>
+                                <button id="CancelButton">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form> 
+
+            <br>
+            <br>
+        </div>
+        <script>
+            // Add a click event listener to the "Cancel" button
+            document.getElementById('CancelButton').addEventListener('click', function() {
+                // Perform any actions you want when the "Register" button is clicked
+                // You can use window.location.href to redirect to a new page or update the current page
+                window.location.href = "{{ url_for('login') }}";
+            });
+            // Add a click event listener to the "Cancel" button
+            document.getElementById('CancelButton2').addEventListener('click', function() {
+                // Perform any actions you want when the "Register" button is clicked
+                // You can use window.location.href to redirect to a new page or update the current page
+                window.location.href = "{{ url_for('login') }}";
+            });
+        </script>
+    </body>
+</html>
